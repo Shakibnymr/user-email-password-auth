@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useState } from "react";
 import { BsFillEyeFill,BsFillEyeSlashFill } from 'react-icons/bs';
@@ -39,6 +39,10 @@ else if(!accepted){
     .then(userCredential => {
         const user = userCredential.user
         console.log(user)
+        sendEmailVerification(userCredential.user)
+        .then(() => {
+            alert('Please check your email and verify your account')
+        })
         setSuccess('User Created Successfully')
     })
     .catch(error => {

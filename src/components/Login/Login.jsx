@@ -1,12 +1,14 @@
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { NavLink } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 
 const Login = () => {
 
 const emailRef = useRef(null)
+
+const [success,setSuccess] = useState('')
 
 const handleForgetPassword = () => {
   const email = emailRef.current.value;
@@ -36,6 +38,12 @@ const handleLogin = e => {
     .then(result => {
         const user = result.user;
         console.log(user)
+        if(result.user.emailVerified){
+          setSuccess('User Logged in Successfully')
+        }
+        else{
+          (alert('Please verify your email address'))
+        }
     } )
     .catch(error => {
         console.log(error)

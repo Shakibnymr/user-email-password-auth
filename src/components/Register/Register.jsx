@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
 
@@ -13,6 +13,7 @@ const handleRegister = e => {
     .then(result => {
         const user = result.user;
         console.log(user)
+        
     })
     .catch(error=>{
         console.log(error)
