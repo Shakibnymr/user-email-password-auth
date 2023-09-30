@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import { NavLink } from "react-router-dom";
 
 
 const Login = () => {
@@ -47,6 +48,13 @@ const handleLogin = e => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
+              </div>
+              <div>
+                <p>
+                  New to this website? Please <NavLink  to="/heroRegister" className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "" : "text-black rounded-3xl p-1 bg-blue-950"
+  }>Register</NavLink>
+                </p>
               </div>
              </form>
             </div>

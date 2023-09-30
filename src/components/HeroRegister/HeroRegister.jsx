@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useState } from "react";
 import { BsFillEyeFill,BsFillEyeSlashFill } from 'react-icons/bs';
+import { NavLink } from "react-router-dom";
 
 const HeroRegister = () => {
 
@@ -91,6 +92,13 @@ else if(!accepted){
        <div className="text-2xl text-green-700 font-semibold">
         {success && <p>{success}</p> }
        </div>
+       <div>
+                <p>
+                  Already have an account? Please <NavLink  to="/login" className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "" : "text-black rounded-3xl p-1 bg-blue-950"
+  }>Please,login</NavLink>
+                </p>
+              </div>
       </div>
     </div>
   </div>
