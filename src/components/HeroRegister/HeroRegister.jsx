@@ -64,7 +64,7 @@ else if (!/[A-Z]/.test(password)){
           <input  name="password" type={showPassword? "text": "password"} placeholder="password" className="input input-bordered relative" required/>
           <span onClick={()=>setShowPassword(!showPassword)} className="absolute mt-14 ml-56">
             {
-                showPassword? <BsFillEyeFill></BsFillEyeFill> : <BsFillEyeSlashFill></BsFillEyeSlashFill>
+                showPassword?<BsFillEyeSlashFill></BsFillEyeSlashFill>  : <BsFillEyeFill></BsFillEyeFill>
             }
           </span>
           <label className="label">
