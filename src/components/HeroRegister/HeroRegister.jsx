@@ -16,7 +16,8 @@ const handleHero = e => {
     e.preventDefault()
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email,password)
+    const accepted = e.target.terms.checked
+    console.log(email,password,accepted)
     setHeroError('')
     setSuccess('')
 
@@ -27,6 +28,10 @@ if(password.length < 6){
 else if (!/[A-Z]/.test(password)){
     setHeroError('your password should have at least one UpperCase characters')
     return
+}
+else if(!accepted){
+  setHeroError('Please accept our terms and conditions')
+  return
 }
 
     createUserWithEmailAndPassword(auth,email,password)
@@ -70,7 +75,12 @@ else if (!/[A-Z]/.test(password)){
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
+          
         </div>
+        <div className="space-x-2">
+            <input type="checkbox" name="terms" id="terms" />
+            <label htmlFor="terms">Accept our <a href="">Terms and Conditions</a></label>
+          </div>
         <div className="form-control mt-6">
           <button className="btn btn-primary">Login</button>
         </div>
@@ -85,7 +95,8 @@ else if (!/[A-Z]/.test(password)){
     </div>
   </div>
 </div>
-    );
-};
+
+)
+}
 
 export default HeroRegister;
