@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useState } from "react";
-
+import { BsFillEyeFill,BsFillEyeSlashFill } from 'react-icons/bs';
 
 const HeroRegister = () => {
 
@@ -9,6 +9,8 @@ const HeroRegister = () => {
 const[heroError,setHeroError] = useState('')
 
 const [success,setSuccess] = useState('')
+
+const [showPassword,setShowPassword] = useState(false)
 
 const handleHero = e => {
     e.preventDefault()
@@ -20,6 +22,10 @@ const handleHero = e => {
 
 if(password.length < 6){
     setHeroError('Password should be at least 6 characters (auth/weak-password).')
+    return
+}
+else if (!/[A-Z]/.test(password)){
+    setHeroError('your password should have at least one UpperCase characters')
     return
 }
 
@@ -55,7 +61,12 @@ if(password.length < 6){
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input name="password" type="password" placeholder="password" className="input input-bordered" required/>
+          <input  name="password" type={showPassword? "text": "password"} placeholder="password" className="input input-bordered relative" required/>
+          <span onClick={()=>setShowPassword(!showPassword)} className="absolute mt-14 ml-56">
+            {
+                showPassword? <BsFillEyeFill></BsFillEyeFill> : <BsFillEyeSlashFill></BsFillEyeSlashFill>
+            }
+          </span>
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
