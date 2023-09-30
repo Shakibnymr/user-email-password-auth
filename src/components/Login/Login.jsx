@@ -1,9 +1,31 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { NavLink } from "react-router-dom";
+import { useRef } from "react";
 
 
 const Login = () => {
+
+const emailRef = useRef(null)
+
+const handleForgetPassword = () => {
+  const email = emailRef.current.value;
+  if(!email){
+    console.log('Please,provide and email')
+    return //never forget to return in these kind of cases.
+  }
+  else if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/){
+    console.log('Please,write a valid email.')
+  }
+
+sendPasswordResetEmail(auth,email)
+.then(()=> {
+  alert('Please,check your email')
+})
+.catch(error => {console.log(error)})
+}
+
+
 
 const handleLogin = e => {
     e.preventDefault()
@@ -35,15 +57,15 @@ const handleLogin = e => {
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name="email" placeholder="email" className="input input-bordered" />
+                <input ref={emailRef} type="email" name="email" placeholder="email" className="input input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" placeholder="password" name="password" className="input input-bordered" />
+                <input  type="password" placeholder="password" name="password" className="input input-bordered" />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                  <a href="#" className="label-text-alt link link-hover" onClick={handleForgetPassword}>Forgot password?</a>
                 </label>
               </div>
               <div className="form-control mt-6">
