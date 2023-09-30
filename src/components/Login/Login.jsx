@@ -14,7 +14,7 @@ const handleForgetPassword = () => {
     console.log('Please,provide and email')
     return //never forget to return in these kind of cases.
   }
-  else if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/){
+  else if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)){
     console.log('Please,write a valid email.')
   }
 
